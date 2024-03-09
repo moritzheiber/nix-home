@@ -2,6 +2,24 @@
 
 set -Eeu -o pipefail
 
+NIX_CONF="https://raw.githubusercontent.com/moritzheiber/nix-home/main/nix.conf"
+CONFIG_NIX="https://raw.githubusercontent.com/moritzheiber/nix-home/main/config.nix"
+HOME_NIX="https://raw.githubusercontent.com/moritzheiber/nix-home/main/home.nix"
+
+function download() {
+  local url
+  local destination
+  local content
+
+  url="${1}"
+  destination="${2}"
+  content="$(curl -SsL "${url}")"
+
+  if [ "$(echo "${content}" | wc -l)" -gt 1 ] ; then
+    echo "${content}" > "${destination}"
+  fi
+}
+
 if [ "$(id -u)" -eq 0 ] ; then
   echo "This script must not be run as root"
   exit 1
@@ -22,10 +40,9 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 nix-channel --update &&
 nix-shell '<home-manager>' -A install
 
-HOME_NIX="$(curl -SsL https://raw.githubusercontent.com/moritzheiber/nix-home/main/home.nix)"
-
-if [ "$(echo "${HOME_NIX}" | wc -l)" -gt 1 ] ; then
-  echo "${HOME_NIX}" > "${HOME}/.config/home-manager/home.nix"
-fi
+mkdir -p "${HOME}/.config/{nix,nixpkgs,home-manager}" &&
+download "${NIX_CONF}" "${HOME}/.config/nix/nix.conf" &&
+download "${CONFIG_NIX}" "${HOME}/.config/nixpkgs/config.nix" &&
+download "${HOME_NIX}" "${HOME}/.config/home-manager/home.nix"
 
 home-manager switch -b backup
