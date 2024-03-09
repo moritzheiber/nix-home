@@ -40,7 +40,7 @@ nix-channel --add https://github.com/nix-community/home-manager/archive/master.t
 nix-channel --update &&
 nix-shell '<home-manager>' -A install
 
-mkdir -p "${HOME}/.config/{nix,nixpkgs,home-manager}" &&
+mkdir -p "${HOME}"/.config/{nix,nixpkgs,home-manager} &&
 download "${NIX_CONF}" "${HOME}/.config/nix/nix.conf" &&
 download "${CONFIG_NIX}" "${HOME}/.config/nixpkgs/config.nix" &&
 download "${HOME_NIX}" "${HOME}/.config/home-manager/home.nix"
