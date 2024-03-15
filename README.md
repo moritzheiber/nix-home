@@ -8,16 +8,16 @@ bash -c "$(curl -fSsL https://raw.githubusercontent.com/moritzheiber/nix-home/ma
 
 ## TODO
 
-[x] `vim`
-[] `gpg` + `git` + per-repository settings
-[] `mutt` + secrets
-[] Codium plugins
-[] GNOME + `gsettings`?
-[] 3D acceleration?
-[] `udev` handling?
-[] `firefox` + profile?
-[] `docker`
-[] `.face`?
-[] `ytsub`
-[] `bluez` + `FastConnectable = true`?
-[] Rust
+* [x] `vim`
+* [ ] `gpg` + `git` + per-repository settings
+* [ ] `mutt` + secrets
+* [ ] Codium plugins
+* [ ] GNOME + `gsettings`?
+* [ ] 3D acceleration?
+* [ ] `udev` handling?
+* [ ] `firefox` + profile?
+* [ ] `docker`
+* [ ] `.face`?
+* [ ] `ytsub`
+* [ ] `bluez` + `FastConnectable = true`?
+* [ ] Rust
